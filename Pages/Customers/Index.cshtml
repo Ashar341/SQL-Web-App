@@ -1,0 +1,42 @@
+﻿@page
+@model SQL_web.Pages.Customers.IndexModel
+@{
+}
+
+
+<br />
+<!--Ingresando titulo y boton de action -->
+
+<h2>List of Customers</h2>
+<a class="btn btn-primary btn-sm" href="/Customers/Create">New Customer</a>
+
+<!--Table header -->
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>PKCustomer</th>
+            <th>Customer</th>
+            <th>Prefix</th>
+            <th>FKBuilding</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!--Table body, iterate for each item on the list and being sent by the
+            code from the database
+        -->
+        @foreach(var item in Model.listCustomers)
+        {
+            <tr>
+                <td>@item.PKCustomers</td>
+                <td>@item.Customer</td>
+                <td>@item.Prefix</td>
+                <td>@item.FKBuilding</td>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="/Customers/Delete?PKCustomer=@item.PKCustomers">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

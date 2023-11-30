@@ -1,0 +1,33 @@
+﻿@page
+@model SQL_web.Pages.Buildings.IndexModel
+@{
+}
+
+<br />
+<!--Ingresando titulo y boton de action -->
+
+<h2>List of Buildings</h2>
+<a class="btn btn-primary btn-sm" href="/Buildings/Create">New Building</a>
+
+<!--Table header -->
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>PKBuilding</th>
+            <th>Building</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!--Table body, iterate for each item on the list and being sent by the
+            code from the database
+        -->
+        @foreach (var building in Model.listBuildings)
+        {
+            <tr>
+                <td>@building.PKBuilding</td>
+                <td>@building.Building</td>
+            </tr>
+        }
+    </tbody>
+</table>

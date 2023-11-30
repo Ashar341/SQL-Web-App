@@ -1,0 +1,64 @@
+﻿@page
+@model SQL_web.Pages.Customers.CreateModel
+@{
+}
+
+
+<br />
+
+
+<h3>New Client</h3>
+
+@if (Model.errorMessage.Length > 0)
+{
+    <div>
+        <strong>@Model.errorMessage</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert">Close</button>
+    </div>
+}
+
+<form method="POST">
+    <!-- Input information for customers we need customer and prefix-->
+    <!--Perhaps we can make prefix automatically, but just if we have time-->
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Customer</label>
+        <div class="col-sm-3">
+            <input type="text" class="form-control" name="customer" value="@Model.customerInfo.Customer" />
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Prefix</label>
+        <div class="col-sm-3">
+            <input type="text" class="form-control" name="prefix" value="@Model.customerInfo.Prefix" />
+        </div>
+    </div>
+
+    <!--If all the information is submitted succes event activated-->
+    @if (Model.success.Length > 0)
+    {
+        <div>
+            <strong>@Model.success</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert">Close</button>
+        </div>
+    }
+    <!-- for the FKbuilding we need to select a list from the other table-->
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">FKBuilding</label>
+        <div class="col-sm-3">
+            <input type="text" class="form-control" name="FKBuilding" value="@Model.customerInfo.FKBuilding" />
+        </div>
+    </div>
+
+    <!--Button to submit-->
+    <div class="row mb-3">
+        <div class="col-sm-3">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-sm-3">
+            <a class="btn btn-outline-primary" href="/" role="button">Cancel</a>
+        </div>
+    </div>
+</form>
