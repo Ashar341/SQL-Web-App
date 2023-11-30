@@ -22,6 +22,7 @@ namespace SQL_web.Pages.Buildings
             //Grab information submited from the Create HTML
             buildingsInfo.Building = Request.Form["Building"];
 
+            //check if there is information in all the variables
             if (buildingsInfo.Building.Length == 0)
             {
                 errorMessage = "All the fields are required";

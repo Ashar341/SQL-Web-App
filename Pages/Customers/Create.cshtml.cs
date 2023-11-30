@@ -10,9 +10,7 @@ namespace SQL_web.Pages.Customers
     {
 
         public CustomertInfo customerInfo = new CustomertInfo();
-
         public string errorMessage = "";
-
         public string success = "";
 
         public void OnGet()
@@ -26,6 +24,7 @@ namespace SQL_web.Pages.Customers
             customerInfo.Prefix = Request.Form["prefix"];
             customerInfo.FKBuilding = Request.Form["FKBuilding"];
 
+            //check if there is information in all the 
             if (customerInfo.FKBuilding.Length == 0 || customerInfo.Prefix.Length == 0 || 
                 customerInfo.Customer.Length == 0)
             {
@@ -36,7 +35,7 @@ namespace SQL_web.Pages.Customers
             try
             {
                 //connect to db
-                string connectionString = "Data Source = DESKTOP - S2E78MP\\WEBAPPPRODUCCION; Initial Catalog = Materials; User ID = MyLogin; Password = ***********; Trust Server Certificate = True";
+                string connectionString = "Data Source=.\\SQLEXPRESS;Initial Catalog=Materials;Integrated Security=True";
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
@@ -49,7 +48,7 @@ namespace SQL_web.Pages.Customers
                     {
                         command.Parameters.AddWithValue("@customer", customerInfo.Customer);
                         command.Parameters.AddWithValue("@prefix", customerInfo.Prefix);
-                        command.Parameters.AddWithValue("@KFBuilding", customerInfo.FKBuilding);
+                        command.Parameters.AddWithValue("@FKBuilding", customerInfo.FKBuilding);
 
                         command.ExecuteNonQuery();
 

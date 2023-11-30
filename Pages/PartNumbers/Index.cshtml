@@ -1,0 +1,36 @@
+﻿@page
+@model SQL_web.Pages.PartNumbers.IndexModel
+@{
+}
+
+<br />
+
+<!--Inserting title and add button-->
+
+<h2> List of Part Numbers</h2>
+<a class="btn btn-primary btn-sm" href="/PartNumbers/Create">New Part</a>
+
+<!--Table-->
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>PKPartNumber</th>
+            <th>PartNumber</th>
+            <th>FKCustomer</th>
+            <th>Available</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!--body from the table, iterate from the list created on the C# code-->
+        @foreach (var item in Model.listpartnumbers)
+        {
+            <tr>
+                <td>@item.PKPartNumber</td>
+                <td>@item.PartNumber</td>
+                <td>@item.FKCustomer</td>
+                <td>@item.Available</td>
+            </tr>
+        }
+    </tbody>
+</table>
