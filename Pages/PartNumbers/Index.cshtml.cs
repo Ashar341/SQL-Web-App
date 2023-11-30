@@ -59,7 +59,7 @@ namespace SQL_web.Pages.PartNumbers
             public String PKPartNumber { get; set; }
             public String PartNumber { get; set; }
             public String FKCustomer { get; set; }
-            public String Available { get; set;}
+            public String Available { get; set; }
         }
     }
 }

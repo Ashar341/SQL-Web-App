@@ -4,7 +4,59 @@
     ViewData["Title"] = "Home page";
 }
 
+<!--Title-->
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
+    <p>In this app we are going to manipulate a SQL server through the web app</p>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+<br />
+
+<!--Filter or search button-->
+
+
+
+<br />
+
+<!--Inserting title and add button-->
+
+<h2>Search by Part Numbers</h2>
+
+<form method="get" asp-page-handler="OnGet">
+    <div class="form-group">
+        <label for="searchTerm">Search Term:</label>
+        <input type="text" id="searchTerm" name="searchTerm" class="form-control" />
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+<!--Table-->
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>PKPartNumber</th>
+            <th>PartNumber</th>
+            <th>FKCustomer</th>
+            <th>Available</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!--body from the table, iterate from the list created on the C# code-->
+        @foreach (var item in Model.listpartnumbers)
+        {
+            <tr>
+                <td>@item.PKPartNumber</td>
+                <td>@item.PartNumber</td>
+                <td>@item.FKCustomer</td>
+                <td>@item.Available</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<br />
+
+<!--Button to import to excel-->
+
