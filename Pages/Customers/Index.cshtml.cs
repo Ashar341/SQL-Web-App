@@ -8,13 +8,17 @@ namespace SQL_web.Pages.Customers
 {
     public class IndexModel : PageModel
     {
+        //Create list to save the variables
         public List<CustomertInfo> listCustomers = new List<CustomertInfo>();
         public void OnGet()
         {
+
             try
             {
-                string connectionString = "Data Source=DESKTOP-S2E78MP\\WEBAPPPRODUCCION;Initial Catalog=Test;Integrated Security=True;Trust Server Certificate=True";
+                //Connection to database in localhost with windows authenthication
+                string connectionString = "Data Source=.\\SQLEXPRESS;Initial Catalog=Materials;Integrated Security=True";
 
+                //Create connection
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
@@ -25,16 +29,17 @@ namespace SQL_web.Pages.Customers
                     {
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
+                            //Continue operation of connection and operation
                             while (reader.Read())
                             {
-                                CustomertInfo customersinfo = new CustomertInfo
-                                {
-                                    PKCustomers = reader.GetInt32(0).ToString(),
-                                    Customer = reader.GetString(1),
-                                    Prefix = reader.GetString(2),
-                                    FKBuilding = reader.GetInt32(3).ToString()
-                                };
-
+                                //Create a new object and read the info from table
+                                CustomertInfo customersinfo = new CustomertInfo();
+                                customersinfo.PKCustomers = "" + reader.GetInt32(0);
+                                customersinfo.Customer = reader.GetString(1);
+                                customersinfo.Prefix = reader.GetString(2);
+                                customersinfo.FKBuilding = "" + reader.GetInt32(3);
+                                
+                                // Save the information from table to the list
                                 listCustomers.Add(customersinfo);
                             }
                         }

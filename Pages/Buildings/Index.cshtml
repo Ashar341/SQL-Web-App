@@ -22,11 +22,11 @@
         <!--Table body, iterate for each item on the list and being sent by the
             code from the database
         -->
-        @foreach (var building in Model.listBuildings)
+        @foreach (var item in Model.listBuildings)
         {
             <tr>
-                <td>@building.PKBuilding</td>
-                <td>@building.Building</td>
+                <td>@item.PKBuilding</td>
+                <td>@item.Building</td>
             </tr>
         }
     </tbody>

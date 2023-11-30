@@ -31,7 +31,7 @@ namespace SQL_web.Pages.Buildings
             try
             {
                 //connect to db
-                string connectionString = "Data Source=DESKTOP-S2E78MP\\WEBAPPPRODUCCION;Initial Catalog=Materials;User ID=MyLogin;Password=***********";
+                string connectionString = "Data Source=.\\SQLEXPRESS;Initial Catalog=Materials;Integrated Security=True";
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();

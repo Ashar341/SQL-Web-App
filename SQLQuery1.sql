@@ -1,11 +1,11 @@
 ﻿CREATE TABLE Buildings (
-    PKBuilding INT PRIMARY KEY IDENTITY(1,1),
+    PKBuilding INT IDENTITY(1,1) PRIMARY KEY,
     Building NVARCHAR(255) NOT NULL
 );
 
 -- Create the Customers table with the foreign key
 CREATE TABLE Customers (
-    PKCustomers INT PRIMARY KEY IDENTITY(1,1),
+    PKCustomers INT IDENTITY(1,1) PRIMARY KEY,
     Customer NVARCHAR(255) NOT NULL,
     Prefix NVARCHAR(5) NOT NULL,
     FKBuilding INT FOREIGN KEY REFERENCES Buildings(PKBuilding)
@@ -14,7 +14,7 @@ CREATE TABLE Customers (
 --Create the third table with foregeign key also
 
 CREATE TABLE PartNumbers (
-	PKPartNumber INT PRIMARY KEY IDENTITY(1,1),
+	PKPartNumber INT IDENTITY(1,1) PRIMARY KEY,
 	PartNumber NVARCHAR(50),
 	FKCustomers INT FOREIGN KEY REFERENCES Customers(PKCustomers),
 	Available BIT
