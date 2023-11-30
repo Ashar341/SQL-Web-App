@@ -2,6 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using static SQL_web.Pages.PartNumbers.IndexModel;
 using System.Data.SqlClient;
+using OfficeOpenXml;
+using System.Configuration;
+
 
 namespace SQL_web.Pages;
 
@@ -19,21 +22,22 @@ public class IndexModel : PageModel
         _logger = logger;
     }
 
-    public void OnGet()
+    public IActionResult OnGet()
     {
         try
         {
-            //Connection to database in localhost with windows authenthication
+            Console.WriteLine("OnGet method is executed.");
+
+            // Connection to database in localhost with Windows authentication
             string connectionString = "Data Source=.\\SQLEXPRESS;Initial Catalog=Materials;Integrated Security=True";
 
-            //Create connection
+            // Create connection
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                //open connection with db
-
+                // Open connection with the database
                 connection.Open();
 
-                // Select all from table part numbers
+                // Select all from the table part numbers
                 string sql = "SELECT * FROM PartNumbers WHERE PartNumber LIKE @SearchTerm";
 
                 using (SqlCommand command = new SqlCommand(sql, connection))
@@ -45,26 +49,40 @@ public class IndexModel : PageModel
                     {
                         while (reader.Read())
                         {
-                            //Create a new object and read the information from table
+                            // Create a new object and read the information from the table
                             PartNumberInfo partinfo = new PartNumberInfo();
                             partinfo.PKPartNumber = "" + reader.GetInt32(0);
                             partinfo.PartNumber = reader.GetString(1);
                             partinfo.FKCustomer = "" + reader.GetInt32(2);
                             partinfo.Available = reader.GetBoolean(3) ? "1" : "0";
 
-                            //Save the information on the list to show in the html
-
+                            // Save the information on the list to show in the HTML
                             listpartnumbers.Add(partinfo);
                         }
                     }
                 }
             }
+            
+            // Creating the Excel function
+            if (Request.Query.TryGetValue("export", out var exportValue))
+            {
+                // Check if 'export' parameter is present in the request and equals "true"
+                if (exportValue == "true")
+                {
+                    var info = GenerateExcel(listpartnumbers);
+                    var byteArray = info.GetAsByteArray();
 
+                    // Return the Excel file as a downloadable file
+                    return File(byteArray, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "ExportedData.xlsx");
+                }
+            }
         }
         catch (Exception ex)
         {
             Console.WriteLine("Exception " + ex.ToString());
         }
+
+        return Page();
     }
 
     public class PartNumberInfo
@@ -75,12 +93,21 @@ public class IndexModel : PageModel
         public String Available { get; set; }
     }
 
-    public IActionResult OnGetExportToExcel()
+    public ExcelPackage GenerateExcel(List<PartNumberInfo> data)
     {
-        // Implement export to Excel logic here
-        // ...
 
-        // For now, redirect to the same page
-        return RedirectToPage("QueryResults");
+        ///Calling excel function
+        ExcelPackage package = new ExcelPackage();
+        ExcelWorksheet Sheet = package.Workbook.Worksheets.Add("Report");
+        //Submitting the information on the excel headers
+        Sheet.Cells["A1"].Value = "ID";
+        Sheet.Cells["B1"].Value = "Part Number";
+        Sheet.Cells["C1"].Value = "Customer";
+        Sheet.Cells["D1"].Value = "Available";
+
+        Sheet.Cells["A2"].LoadFromCollection(data);
+
+        return package;
+
     }
 }

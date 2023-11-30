@@ -8,7 +8,6 @@
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>In this app we are going to manipulate a SQL server through the web app</p>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 <br />
 
@@ -29,6 +28,11 @@
     </div>
     <br />
     <button type="submit" class="btn btn-primary">Search</button>
+
+    <!--Button to import to excel-->
+
+    <a asp-page="./Index" asp-route-searchTerm="@Model.SearchTerm" asp-route-export="true" class="btn btn-success">Export to Excel</a>
+
 </form>
 
 <!--Table-->
@@ -57,6 +61,4 @@
 </table>
 
 <br />
-
-<!--Button to import to excel-->
 
