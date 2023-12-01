@@ -18,7 +18,7 @@ namespace SQL_web.Pages.PartNumbers
             try
             {
                 //Connection to database in localhost with windows authenthication
-                string connectionString = "Data Source=.\\SQLEXPRESS;Initial Catalog=Materials;Integrated Security=True";
+                string connectionString = "Data Source=.\\SQLEXPRESS;Initial Catalog=Materials;User ID=MyLogin2;Password=1234";
 
                 //Create connection
                 using (SqlConnection connection = new SqlConnection(connectionString))

@@ -32,7 +32,7 @@ namespace SQL_web.Pages.Buildings
             try
             {
                 //connect to db
-                string connectionString = "Data Source=.\\SQLEXPRESS;Initial Catalog=Materials;Integrated Security=True";
+                string connectionString = "Data Source=.\\SQLEXPRESS;Initial Catalog=Materials;User ID=MyLogin2;Password=1234";
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
