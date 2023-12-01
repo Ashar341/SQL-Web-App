@@ -21,14 +21,14 @@
     <!-- Input information for customers we need customer and prefix-->
     <!--Perhaps we can make prefix automatically, but just if we have time-->
     <div class="row mb-3">
-        <label class="col-sm-3 col-form-label">Customer</label>
+        <label class="col-sm-3 col-form-label">Customer name: </label>
         <div class="col-sm-3">
             <input type="text" class="form-control" name="customer" value="@Model.customerInfo.Customer" />
         </div>
     </div>
 
     <div class="row mb-3">
-        <label class="col-sm-3 col-form-label">Prefix</label>
+        <label class="col-sm-3 col-form-label">Prefix: </label>
         <div class="col-sm-3">
             <input type="text" class="form-control" name="prefix" value="@Model.customerInfo.Prefix" />
         </div>
@@ -36,7 +36,7 @@
 
     <!-- for the FKbuilding we need to select a list from the other table-->
     <div class="row mb-3">
-        <label class="col-sm-3 col-form-label">FKBuilding</label>
+        <label class="col-sm-3 col-form-label">Building: </label>
         <div class="col-sm-3">
             <select class="form-select" name="FKBuilding">
                 @foreach (var building in Model.listBuildings)

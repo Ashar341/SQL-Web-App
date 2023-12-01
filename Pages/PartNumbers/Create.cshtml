@@ -13,16 +13,16 @@
 }
 
 <form method="POST">
-    <!-- Input information for customers we need part number, kfcustomer and availability-->
+    <!-- Input information for part number we need part number, kfcustomer and availability-->
     <div class="row mb-3">
-        <label class="col-sm-3 col-form-label">Part Number</label>
+        <label class="col-sm-3 col-form-label">Part Number: </label>
         <div class="col-sm-3">
             <input type="text" class="form-control" name="partnumber" value="" />
         </div>
     </div>
     <!-- part number that cames from the table customers-->
     <div class="row mb-3">
-        <label class="col-sm-3 col-form-label">FKCustomer</label>
+        <label class="col-sm-3 col-form-label">Customer owner: </label> 
         <div class="col-sm-3">
             <select class="form-select" name="FKCustomer">
                 @foreach (var customers in Model.listCustomers)
@@ -36,9 +36,12 @@
 
     <!-- for the Available we need to select a a yes or no, but using 0 and 1-->
     <div class="row mb-3">
-        <label class="col-sm-3 col-form-label">Available</label>
+        <label class="col-sm-3 col-form-label">Part Available</label>
         <div class="col-sm-3">
-            <input type="text" class="form-control" name="available" value="@Model.partinfo.Available" />
+            <select class="form-select" name="Available: ">
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+           </select>
         </div>
     </div>
     <!--If all the information is submitted succes event activated-->
