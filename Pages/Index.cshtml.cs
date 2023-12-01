@@ -37,8 +37,14 @@ public class IndexModel : PageModel
                 // Open connection with the database
                 connection.Open();
 
-                // Select all from the table part numbers
-                string sql = "SELECT * FROM PartNumbers WHERE PartNumber LIKE @SearchTerm";
+                // Select all from the all the tables needed
+                // Need to reduce the list information to improve search time
+                string sql = "SELECT * FROM PartNumbers " +
+                    "LEFT JOIN Customers " +
+                    "ON PartNumbers.FKCustomers = Customers.PKCustomers " +
+                    "LEFT JOIN Buildings " +
+                    "ON Customers.FKBuilding = Buildings.PKBuilding " +
+                    "WHERE PartNumber LIKE @SearchTerm; ";
 
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
@@ -54,7 +60,13 @@ public class IndexModel : PageModel
                             partinfo.PKPartNumber = "" + reader.GetInt32(0);
                             partinfo.PartNumber = reader.GetString(1);
                             partinfo.FKCustomer = "" + reader.GetInt32(2);
-                            partinfo.Available = reader.GetBoolean(3) ? "1" : "0";
+                            partinfo.Available = reader.GetBoolean(3) ? "Yes" : "No";
+                            partinfo.PKCustomer = "" + reader.GetInt32(4);
+                            partinfo.Customer = reader.GetString(5);
+                            partinfo.Prefix = reader.GetString(6);
+                            partinfo.FKBuilding = "" + reader.GetInt32(7);
+                            partinfo.PKBuilding = "" + reader.GetInt32(8);
+                            partinfo.Building = reader.GetString(9);
 
                             // Save the information on the list to show in the HTML
                             listpartnumbers.Add(partinfo);
@@ -91,6 +103,12 @@ public class IndexModel : PageModel
         public String PartNumber { get; set; }
         public String FKCustomer { get; set; }
         public String Available { get; set; }
+        public String PKCustomer { get; set; }
+        public String Customer { get; set; }
+        public String Prefix { get; set; }
+        public String FKBuilding { get; set; }
+        public String PKBuilding { get; set; }
+        public String Building { get; set;}
     }
 
     public ExcelPackage GenerateExcel(List<PartNumberInfo> data)

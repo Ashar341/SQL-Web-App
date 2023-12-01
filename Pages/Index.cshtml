@@ -7,7 +7,7 @@
 <!--Title-->
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>In this app we are going to manipulate a SQL server through the web app</p>
+    <p>In this app we are going to manipulate a SQL server through web app</p>
 </div>
 <br />
 
@@ -23,7 +23,7 @@
 
 <form method="get" asp-page-handler="OnGet">
     <div class="form-group">
-        <label for="searchTerm">Search Term:</label>
+        <label for="searchTerm">Part Number: </label>
         <input type="text" id="searchTerm" name="searchTerm" class="form-control" />
     </div>
     <br />
@@ -40,9 +40,10 @@
 <table class="table">
     <thead>
         <tr>
-            <th>PKPartNumber</th>
-            <th>PartNumber</th>
-            <th>FKCustomer</th>
+            <th>Id</th>
+            <th>Part Number</th>
+            <th>Customer</th>
+            <th>Building</th>
             <th>Available</th>
         </tr>
     </thead>
@@ -53,7 +54,8 @@
             <tr>
                 <td>@item.PKPartNumber</td>
                 <td>@item.PartNumber</td>
-                <td>@item.FKCustomer</td>
+                <td>@item.Customer</td>
+                <td>@item.Building</td>
                 <td>@item.Available</td>
             </tr>
         }
