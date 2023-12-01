@@ -57,12 +57,10 @@ namespace SQL_web.Pages.PartNumbers
 
         public void OnPost() 
         {
-            
-            
             //Obtain information from the HTML request
             partinfo.PartNumber = Request.Form["partnumber"];
-            partinfo.FKCustomer = Request.Form["fkcustomer"];
-            partinfo.Available = Request.Form["available"];
+            partinfo.FKCustomer = Request.Form["FKCustomer"];
+            partinfo.Available = Request.Form["Available"];
 
             //Check if all the fields are submitted
 
@@ -73,9 +71,7 @@ namespace SQL_web.Pages.PartNumbers
                 return;
             }
 
-
             //Submit the information in db
-
             try
             {
                 string connectionString = "Data Source=.\\SQLEXPRESS;Initial Catalog=Materials;Integrated Security=True";
@@ -86,12 +82,12 @@ namespace SQL_web.Pages.PartNumbers
 
                     string sql = "INSERT INTO PartNumbers " +
                         "(PartNumber, FKCustomers, Available) VALUES " +
-                        "(@partnumber, @fkcustomer, @available)";
+                        "(@partnumber, @FKCustomer, @Available)";
                     using(SqlCommand command = new SqlCommand(sql, connection))
                     {
                         command.Parameters.AddWithValue("@partnumber", partinfo.PartNumber);
-                        command.Parameters.AddWithValue("@fkcustomer", partinfo.FKCustomer);
-                        command.Parameters.AddWithValue("@available", partinfo.Available);
+                        command.Parameters.AddWithValue("@FKCustomer", partinfo.FKCustomer);
+                        command.Parameters.AddWithValue("@Available", partinfo.Available);
 
                         command.ExecuteNonQuery();
 

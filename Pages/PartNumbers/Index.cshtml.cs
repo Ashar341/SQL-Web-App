@@ -23,8 +23,11 @@ namespace SQL_web.Pages.PartNumbers
 
                     connection.Open();
 
-                    // Select all from table part numbers
-                    string sql = "SELECT * FROM PartNumbers";
+                    // Select the desired information from table part numbers
+                    // Left join to grab the correct customer name
+                    string sql = "SELECT * FROM PartNumbers " +
+                        "LEFT JOIN Customers "+
+                        "ON PartNumbers.FKCustomers = Customers.PKCustomers;";
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
@@ -37,7 +40,12 @@ namespace SQL_web.Pages.PartNumbers
                                 partinfo.PKPartNumber = "" + reader.GetInt32(0);
                                 partinfo.PartNumber = reader.GetString(1);
                                 partinfo.FKCustomer = "" + reader.GetInt32(2);
-                                partinfo.Available = reader.GetBoolean(3) ? "1" : "0";
+                                partinfo.Available = reader.GetBoolean(3) ? "Yes" : "No";
+                                partinfo.PKCustomer = "" + reader.GetInt32(4);
+                                partinfo.Customer = reader.GetString(5);
+                                partinfo.Prefix = reader.GetString(6);
+                                partinfo.FKBuilding = "" + reader.GetInt32(7);
+
 
                                 //Save the information on the list to show in the html
 
@@ -60,6 +68,10 @@ namespace SQL_web.Pages.PartNumbers
             public String PartNumber { get; set; }
             public String FKCustomer { get; set; }
             public String Available { get; set; }
+            public String PKCustomer {  get; set; }
+            public String Customer { get; set; }
+            public String Prefix { get; set; }
+            public String FKBuilding { get; set; }
         }
     }
 }

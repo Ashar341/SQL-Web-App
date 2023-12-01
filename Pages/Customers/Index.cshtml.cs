@@ -23,7 +23,9 @@ namespace SQL_web.Pages.Customers
                 {
                     connection.Open();
 
-                    string sql = "SELECT * FROM Customers";
+                    string sql = "SELECT * FROM Customers " +
+                        "LEFT JOIN Buildings "+
+                        "ON Customers.FKBuilding = Buildings.PKBuilding;";
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
@@ -38,6 +40,8 @@ namespace SQL_web.Pages.Customers
                                 customersinfo.Customer = reader.GetString(1);
                                 customersinfo.Prefix = reader.GetString(2);
                                 customersinfo.FKBuilding = "" + reader.GetInt32(3);
+                                customersinfo.PKBuilding = ""+ reader.GetInt32(4);
+                                customersinfo.Building = reader.GetString(5);
                                 
                                 // Save the information from table to the list
                                 listCustomers.Add(customersinfo);
@@ -60,6 +64,8 @@ namespace SQL_web.Pages.Customers
             public String Customer { get; set; }
             public String Prefix { get; set; }
             public String FKBuilding { get; set; }
+            public String PKBuilding { get; set; }
+            public String Building { get; set; }
         }
     }
 }

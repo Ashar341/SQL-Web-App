@@ -10,6 +10,11 @@
 <h2> List of Part Numbers</h2>
 <a class="btn btn-primary btn-sm" href="/PartNumbers/Create">New Part</a>
 
+<br />
+<div>
+    <p> Parts available: </p>
+</div>
+
 <!--Table-->
 
 <table class="table">
@@ -28,7 +33,7 @@
             <tr>
                 <td>@item.PKPartNumber</td>
                 <td>@item.PartNumber</td>
-                <td>@item.FKCustomer</td>
+                <td>@item.Customer</td>
                 <td>@item.Available</td>
             </tr>
         }
