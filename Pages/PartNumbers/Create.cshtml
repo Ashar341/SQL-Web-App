@@ -14,22 +14,27 @@
 
 <form method="POST">
     <!-- Input information for customers we need part number, kfcustomer and availability-->
-    <!--Perhaps we can make prefix automatically, but just if we have time-->
     <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Part Number</label>
         <div class="col-sm-3">
             <input type="text" class="form-control" name="partnumber" value="" />
         </div>
     </div>
-
+    <!-- part number that cames from the table customers-->
     <div class="row mb-3">
         <label class="col-sm-3 col-form-label">FKCustomer</label>
         <div class="col-sm-3">
-            <input type="text" class="form-control" name="fkcustomer" value="@Model.partinfo.FKCustomer" />
+            <select class="form-select" name="FKCustomer">
+                @foreach (var customers in Model.listCustomers)
+                {
+                    <option value="@customers.PKCustomers">@customers.Customer</option>
+                }
+
+            </select>
         </div>
     </div>
 
-    <!-- for the FKbuilding we need to select a list from the other table-->
+    <!-- for the Available we need to select a a yes or no, but using 0 and 1-->
     <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Available</label>
         <div class="col-sm-3">

@@ -38,7 +38,12 @@
     <div class="row mb-3">
         <label class="col-sm-3 col-form-label">FKBuilding</label>
         <div class="col-sm-3">
-            <input type="text" class="form-control" name="FKBuilding" value="@Model.customerInfo.FKBuilding" />
+            <select class="form-select" name="FKBuilding">
+                @foreach (var building in Model.listBuildings)
+                {
+                    <option value="@building.PKBuilding">@building.Building</option>
+                }
+            </select>
         </div>
     </div>
     <!--If all the information is submitted succes event activated-->
@@ -57,7 +62,7 @@
     </div>
     <div class="row mb-3">
         <div class="col-sm-3">
-            <a class="btn btn-outline-primary" href="/" role="button">Cancel</a>
+            <a class="btn btn-outline-primary" href="/Customers" role="button">Cancel</a>
         </div>
     </div>
 </form>

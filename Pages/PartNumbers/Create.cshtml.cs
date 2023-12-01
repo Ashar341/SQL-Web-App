@@ -9,10 +9,50 @@ namespace SQL_web.Pages.PartNumbers
     public class CreateModel : PageModel
     {
         public partNumberInfo partinfo = new partNumberInfo();
+        public List<CustomertInfo> listCustomers = new List<CustomertInfo>();
         public string errorMessage = "";
         public string success = "";
         public void OnGet()
         {
+
+            try
+            {
+                //Connection to database in localhost with windows authenthication
+                string connectionString = "Data Source=.\\SQLEXPRESS;Initial Catalog=Materials;Integrated Security=True";
+
+                //Create connection
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    string sql = "SELECT * FROM Customers";
+
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            //Continue operation of connection and operation
+                            while (reader.Read())
+                            {
+                                //Create a new object and read the info from table
+                                CustomertInfo customersinfo = new CustomertInfo();
+                                customersinfo.PKCustomers = "" + reader.GetInt32(0);
+                                customersinfo.Customer = reader.GetString(1);
+                                customersinfo.Prefix = reader.GetString(2);
+                                customersinfo.FKBuilding = "" + reader.GetInt32(3);
+
+                                // Save the information from table to the list
+                                listCustomers.Add(customersinfo);
+                            }
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception: " + ex.ToString());
+            }
         }
 
         public void OnPost() 
