@@ -29,7 +29,7 @@ public class IndexModel : PageModel
             Console.WriteLine("OnGet method is executed.");
 
             // Connection to database in localhost with Windows authentication
-            string connectionString = "Data Source=.\\SQLEXPRESS;Initial Catalog=Materials;User ID=MyLogin2;Password=1234";
+            string connectionString = "Data Source=.\\SQLEXPRESS;Initial Catalog=Materials;Integrated Security=True";
 
             // Create connection
             using (SqlConnection connection = new SqlConnection(connectionString))

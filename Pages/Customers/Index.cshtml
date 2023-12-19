@@ -23,6 +23,7 @@
             <th>Customer</th>
             <th>Prefix</th>
             <th>Building</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -36,6 +37,10 @@
                 <td>@item.Customer</td>
                 <td>@item.Prefix</td>
                 <td>@item.Building</td>
+                <td>
+                    <a class="btn btn-primary btn-close" href="/Customers/Edit?id=">Edit</a>
+                    <a class="btn btn-primary btn-close" href="/Customers/Delete?id=">Delete</a>
+                </td>
             </tr>
         }
     </tbody>

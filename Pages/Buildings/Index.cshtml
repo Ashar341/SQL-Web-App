@@ -19,6 +19,7 @@
         <tr>
             <th>Number of building</th>
             <th>Building</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -30,6 +31,10 @@
             <tr>
                 <td>@item.PKBuilding</td>
                 <td>@item.Building</td>
+                <td>
+                    <a class="btn btn-primary btn-close" href="/Buildings/Edit?id=@item.PKBuilding">Edit</a>
+                    <a class="btn btn-primary btn-close" href="/Buildings/Delete?id=@item.PKBuilding">Delete</a>
+                </td>
             </tr>
         }
     </tbody>

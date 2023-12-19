@@ -12,7 +12,7 @@ namespace SQL_web.Pages.Buildings
         {
             try
             {
-                string connectionString = "Data Source=.\\SQLEXPRESS;Initial Catalog=Materials;User ID=MyLogin2;Password=1234";
+                string connectionString = "Data Source=.\\SQLEXPRESS;Initial Catalog=Materials;Integrated Security=True";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
