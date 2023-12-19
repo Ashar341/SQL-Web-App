@@ -1,0 +1,50 @@
+﻿@page
+@model SQL_web.Pages.Buildings.EditModel
+@{
+}
+
+<br />
+
+
+<h3>Edit Building</h3>
+
+@if (Model.errorMessage.Length > 0)
+{
+    <div>
+        <strong>@Model.errorMessage</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert">Close</button>
+    </div>
+}
+
+<form method="POST">
+    <!-- Input information for Building we need Building-->
+    <input type="hidden" name="id" value="@Model.buildingsInfo.PKBuilding" />
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Building Name: </label>
+        <div class="col-sm-3">
+            <input type="text" class="form-control" name="Building" value="@Model.buildingsInfo.Building" />
+        </div>
+    </div>
+
+    <!--If all the information is submitted succes event activated-->
+    @if (Model.success.Length > 0)
+    {
+        <div>
+            <strong>@Model.success</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert">Close</button>
+        </div>
+    }
+
+    <!--Button to submit-->
+    <div class="row mb-3">
+        <div class="col-sm-3">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+    <!--Button to cancel-->
+    <div class="row mb-3">
+        <div class="col-sm-3">
+            <a class="btn btn-secondary" href="/Buildings" role="button">Cancel</a>
+        </div>
+    </div>
+</form>
